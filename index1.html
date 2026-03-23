@@ -1,0 +1,2506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master AI in 2 Weeks | Zubeg Ideal Tech Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #0a0a1a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --accent-orange: #ff6b35;
+            --accent-blue: #4facfe;
+            --accent-purple: #a855f7;
+            --glow-purple: rgba(168, 85, 247, 0.5);
+            --glow-orange: rgba(255, 107, 53, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0d0d2b 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(102, 126, 234, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 40% 60%, rgba(255, 107, 53, 0.1) 0%, transparent 40%);
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(168, 85, 247, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .particle:nth-child(odd) {
+            background: rgba(79, 172, 254, 0.6);
+        }
+
+        .particle:nth-child(3n) {
+            background: rgba(255, 107, 53, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(10, 10, 26, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+            -webkit-text-fill-color: var(--accent-orange);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px var(--glow-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge::before {
+            content: '🔥';
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title .highlight {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-title .warning {
+            color: var(--accent-orange);
+            -webkit-text-fill-color: var(--accent-orange);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 500px;
+        }
+
+        .hero-quote {
+            padding: 1rem 1.5rem;
+            background: var(--glass-bg);
+            border-left: 3px solid var(--accent-purple);
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 2rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .hero-quote span {
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* Pricing Box */
+        .pricing-box {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .pricing-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .old-price {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+        }
+
+        .new-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ff6b35, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-label {
+            background: var(--accent-orange);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Countdown Timer */
+        .countdown-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .countdown-label::before {
+            content: '⏳';
+        }
+
+        .countdown {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .countdown-item {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(245, 87, 108, 0.2));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            min-width: 70px;
+        }
+
+        .countdown-number {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .countdown-unit {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 2.5rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #f5576c 100%);
+            border: none;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 60px var(--glow-orange);
+        }
+
+        .cta-button .icon {
+            font-size: 1.25rem;
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            position: relative;
+            animation: slideInRight 1s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image-container {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(168, 85, 247, 0.3),
+                transparent,
+                rgba(79, 172, 254, 0.3),
+                transparent
+            );
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-image-inner {
+            position: relative;
+            background: var(--dark-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        .instructor-avatars {
+            display: flex;
+            justify-content: center;
+            gap: -1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: 4px solid var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            position: relative;
+            margin-left: -1rem;
+        }
+
+        .avatar:first-child {
+            margin-left: 0;
+        }
+
+        .avatar::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                var(--accent-purple),
+                var(--accent-blue),
+                var(--accent-orange),
+                var(--accent-purple)
+            );
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+
+        .ai-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .ai-tag {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .ai-tag:hover {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            padding: 0.75rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 0.85rem;
+            animation: floatBounce 3s ease-in-out infinite;
+        }
+
+        .floating-element.top-left {
+            top: -20px;
+            left: -20px;
+            animation-delay: 0s;
+        }
+
+        .floating-element.top-right {
+            top: 20px;
+            right: -30px;
+            animation-delay: 1s;
+        }
+
+        .floating-element.bottom-left {
+            bottom: 40px;
+            left: -40px;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Opportunity Section */
+        .opportunity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .opportunity-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opportunity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .opportunity-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .opportunity-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .opportunity-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .opportunity-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .opportunity-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .opportunity-statement {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .opportunity-statement p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .opportunity-statement span {
+            color: var(--accent-orange);
+        }
+
+        /* Problem Section */
+        .problem-section {
+            background: linear-gradient(180deg, transparent, rgba(255, 107, 53, 0.03), transparent);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .problem-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .problem-emoji {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .problem-audience {
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .problem-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .problem-card p {
+            color: var(--text-secondary);
+        }
+
+        .fear-trigger {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 87, 108, 0.1));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .fear-trigger p {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .fear-trigger .highlight {
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        /* Transformation Section */
+        .transformation-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .transformation-box {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+        }
+
+        .transformation-box.before {
+            border-color: rgba(255, 107, 53, 0.3);
+        }
+
+        .transformation-box.after {
+            border-color: rgba(79, 172, 254, 0.3);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(168, 85, 247, 0.1));
+        }
+
+        .transformation-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .transformation-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .before .transformation-icon {
+            background: rgba(255, 107, 53, 0.2);
+        }
+
+        .after .transformation-icon {
+            background: rgba(79, 172, 254, 0.2);
+        }
+
+        .transformation-label {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .transformation-list {
+            list-style: none;
+        }
+
+        .transformation-list li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 1.1rem;
+        }
+
+        .transformation-list li:last-child {
+            border-bottom: none;
+        }
+
+        .transformation-list .icon {
+            font-size: 1.25rem;
+        }
+
+        .transformation-arrow {
+            font-size: 3rem;
+            color: var(--accent-purple);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Course Modules Section */
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .module-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            border-radius: 0 20px 0 100px;
+            transition: all 0.4s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-purple);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.2);
+        }
+
+        .module-card:hover::after {
+            opacity: 0.2;
+        }
+
+        .module-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .module-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Value Stack Section */
+        .value-section {
+            background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.05), transparent);
+        }
+
+        .value-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .value-pricing {
+            background: var(--glass-bg);
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-pricing::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(255, 107, 53, 0.1),
+                transparent,
+                rgba(168, 85, 247, 0.1),
+                transparent
+            );
+            animation: rotate 15s linear infinite;
+        }
+
+        .value-pricing-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .global-value {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .global-value span {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+        }
+
+        .regular-price {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: line-through;
+            margin-bottom: 1rem;
+        }
+
+        .promo-label {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--accent-orange);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            animation: glow 2s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px var(--glow-orange);
+            }
+            50% {
+                box-shadow: 0 0 40px var(--glow-orange), 0 0 60px var(--glow-orange);
+            }
+        }
+
+        .promo-price {
+            font-size: 4rem;
+            font-weight: 900;
+            font-family: 'Space Grotesk', sans-serif;
+            background: linear-gradient(135deg, #ff6b35, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+        }
+
+        .value-bonuses {
+            padding: 0;
+        }
+
+        .bonuses-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .bonus-list {
+            list-style: none;
+        }
+
+        .bonus-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .bonus-item:hover {
+            border-color: var(--accent-purple);
+            transform: translateX(10px);
+        }
+
+        .bonus-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .bonus-content h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .bonus-content p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Community Section */
+        .community-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .community-text h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .community-text p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .community-features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .community-feature {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .community-feature:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-5px);
+        }
+
+        .community-feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .community-feature h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .community-visual {
+            position: relative;
+        }
+
+        .community-image {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .community-avatars {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .community-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            border: 3px solid var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-left: -15px;
+        }
+
+        .community-avatar:first-child {
+            margin-left: 0;
+        }
+
+        .community-count {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .community-count span {
+            color: var(--accent-orange);
+        }
+
+        /* Urgency Section */
+        .urgency-section {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(245, 87, 108, 0.1));
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        .urgency-content {
+            text-align: center;
+        }
+
+        .urgency-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .urgency-title span {
+            color: var(--accent-orange);
+        }
+
+        .urgency-countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .urgency-countdown .countdown-item {
+            min-width: 100px;
+            padding: 1.5rem;
+        }
+
+        .urgency-countdown .countdown-number {
+            font-size: 3rem;
+        }
+
+        .urgency-microcopy {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+
+        /* How It Works */
+        .steps-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            text-align: center;
+            flex: 1;
+            min-width: 280px;
+            max-width: 350px;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-purple);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border: 4px solid var(--dark-bg);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .step-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+        }
+
+        .step-arrow {
+            font-size: 2rem;
+            color: var(--accent-purple);
+            align-self: center;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 4rem;
+            color: var(--accent-purple);
+            opacity: 0.3;
+            font-family: serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            padding-top: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .testimonial-info h4 {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .testimonial-stars {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem;
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+        }
+
+        .faq-question:hover {
+            color: var(--accent-purple);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Final CTA Section */
+        .final-cta {
+            text-align: center;
+            padding: 8rem 2rem;
+            background: linear-gradient(180deg, transparent, rgba(102, 126, 234, 0.1), rgba(168, 85, 247, 0.1));
+        }
+
+        .final-cta-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta-title .highlight {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta-title .warning {
+            color: var(--accent-orange);
+            -webkit-text-fill-color: var(--accent-orange);
+        }
+
+        .final-cta-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .final-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, #ff6b35 0%, #f5576c 100%);
+            border: none;
+            border-radius: 60px;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            animation: glow 2s infinite;
+        }
+
+        .final-cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 30px 60px var(--glow-orange);
+        }
+
+        .cta-subtext {
+            margin-top: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-contact {
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--accent-orange);
+        }
+
+        .footer-copyright {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content {
+                order: 1;
+            }
+
+            .hero-visual {
+                order: 0;
+                margin-bottom: 2rem;
+            }
+
+            .hero-subtitle {
+                margin: 0 auto 1.5rem;
+            }
+
+            .countdown {
+                justify-content: center;
+            }
+
+            .transformation-container {
+                grid-template-columns: 1fr;
+            }
+
+            .transformation-arrow {
+                transform: rotate(90deg);
+            }
+
+            .value-container {
+                grid-template-columns: 1fr;
+            }
+
+            .community-content {
+                grid-template-columns: 1fr;
+            }
+
+            .community-visual {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-cta {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .countdown-item {
+                min-width: 55px;
+                padding: 0.5rem;
+            }
+
+            .countdown-number {
+                font-size: 1.25rem;
+            }
+
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .floating-element {
+                display: none;
+            }
+
+            .instructor-avatars {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .avatar {
+                margin-left: 0;
+                margin-bottom: -1rem;
+            }
+
+            .urgency-countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .urgency-countdown .countdown-item {
+                min-width: 70px;
+                padding: 1rem;
+            }
+
+            .urgency-countdown .countdown-number {
+                font-size: 2rem;
+            }
+
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .step-arrow {
+                transform: rotate(90deg);
+            }
+
+            .community-features {
+                grid-template-columns: 1fr;
+            }
+
+            .promo-price {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-badge {
+                font-size: 0.75rem;
+            }
+
+            .pricing-box {
+                padding: 1rem;
+            }
+
+            .new-price {
+                font-size: 2rem;
+            }
+
+            .countdown {
+                gap: 0.5rem;
+            }
+
+            .countdown-item {
+                min-width: 50px;
+            }
+
+            .problem-grid, .modules-grid, .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--primary-gradient);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">ZUBEG<span>.</span>IDEAL</div>
+            <button class="nav-cta" onclick="scrollToPayment()">Enroll Now 🚀</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Limited Time Offer — 50% OFF</div>
+                <h1 class="hero-title">
+                    Master <span class="highlight">AI</span> in 2 Weeks —<br>
+                    <span class="warning">Or Get Left Behind</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Learn how to use AI tools like ChatGPT to create, automate, and earn — even as a complete beginner.
+                </p>
+                <div class="hero-quote">
+                    <span>"AI is the new oil."</span> The people who learn it early will control the future.
+                </div>
+                
+                <div class="pricing-box">
+                    <div class="pricing-row">
+                        <span class="old-price">₦30,000</span>
+                        <span class="new-price">₦15,000</span>
+                        <span class="price-label">50% OFF</span>
+                    </div>
+                    
+                    <div class="countdown-container">
+                        <div class="countdown-label">Promo Price Ends In:</div>
+                        <div class="countdown" id="heroCountdown">
+                            <div class="countdown-item">
+                                <div class="countdown-number" id="hero-days">02</div>
+                                <div class="countdown-unit">Days</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-number" id="hero-hours">18</div>
+                                <div class="countdown-unit">Hours</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-number" id="hero-minutes">45</div>
+                                <div class="countdown-unit">Mins</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-number" id="hero-seconds">30</div>
+                                <div class="countdown-unit">Secs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#payment" class="cta-button">
+                    <span class="icon">🚀</span>
+                    <span>Secure My Spot at ₦15,000</span>
+                </a>
+            </div>
+
+            <div class="hero-visual">
+                <div class="floating-element top-left">🤖 AI Powered</div>
+                <div class="floating-element top-right">💰 Earn More</div>
+                <div class="floating-element bottom-left">📈 10x Productivity</div>
+                
+                <div class="hero-image-container">
+                    <div class="hero-image-inner">
+                        <div class="instructor-avatars">
+                            <div class="avatar">👨🏾‍💻</div>
+                            <div class="avatar">👩🏾‍💻</div>
+                        </div>
+                        <div class="ai-elements">
+                            <span class="ai-tag">ChatGPT</span>
+                            <span class="ai-tag">Prompt Engineering</span>
+                            <span class="ai-tag">AI Content</span>
+                            <span class="ai-tag">Automation</span>
+                            <span class="ai-tag">Monetization</span>
+                            <span class="ai-tag">Digital Skills</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opportunity Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">🌍 The Opportunity</span>
+                <h2 class="section-title">Why AI? Why Now?</h2>
+                <p class="section-subtitle">The world is changing. Those who understand AI will lead. Those who don't will follow.</p>
+            </div>
+
+            <div class="opportunity-grid">
+                <div class="opportunity-card reveal">
+                    <div class="opportunity-icon">📈</div>
+                    <h3>Fastest Growing Industry</h3>
+                    <p>AI is projected to add $15.7 trillion to the global economy by 2030. This is the biggest shift since the internet.</p>
+                </div>
+                <div class="opportunity-card reveal">
+                    <div class="opportunity-icon">🏆</div>
+                    <h3>Early Adopters Always Win</h3>
+                    <p>Remember when people dismissed computers and the internet? Those who learned early are the millionaires of today.</p>
+                </div>
+                <div class="opportunity-card reveal">
+                    <div class="opportunity-icon">🌐</div>
+                    <h3>Remote Work Evolution</h3>
+                    <p>AI is reshaping how we work. Location no longer matters — skills do. Work from anywhere, earn globally.</p>
+                </div>
+                <div class="opportunity-card reveal">
+                    <div class="opportunity-icon">💰</div>
+                    <h3>Multiply Your Income</h3>
+                    <p>People using AI are doing in 1 hour what used to take 10. They're earning more while working less.</p>
+                </div>
+            </div>
+
+            <div class="opportunity-statement reveal">
+                <p>"This is not just a course. It's <span>positioning for the future.</span>"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="section problem-section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">😰 The Problem</span>
+                <h2 class="section-title">Does This Sound Like You?</h2>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card reveal">
+                    <div class="problem-emoji">🎓</div>
+                    <div class="problem-audience">For Students</div>
+                    <h3 class="problem-question">"Tired of learning things that don't pay?"</h3>
+                    <p>You're spending years in school, but nothing you learn translates to real money or job security.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <div class="problem-emoji">💼</div>
+                    <div class="problem-audience">For Salary Earners</div>
+                    <h3 class="problem-question">"Working hard but income is stagnant?"</h3>
+                    <p>You give your best 9-5, but your salary barely moves. Meanwhile, expenses keep rising.</p>
+                </div>
+                <div class="problem-card reveal">
+                    <div class="problem-emoji">👨‍👩‍👧‍👦</div>
+                    <div class="problem-audience">For Parents</div>
+                    <h3 class="problem-question">"Want your child to be future-ready?"</h3>
+                    <p>The skills that mattered yesterday won't matter tomorrow. Prepare them for what's coming.</p>
+                </div>
+            </div>
+
+            <div class="fear-trigger reveal">
+                <p>⚠️ Many jobs will be replaced by AI — but those who <span class="highlight">understand it will be in control.</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">✨ The Transformation</span>
+                <h2 class="section-title">Your Journey From Confused to Confident</h2>
+            </div>
+
+            <div class="transformation-container reveal">
+                <div class="transformation-box before">
+                    <div class="transformation-header">
+                        <div class="transformation-icon">😔</div>
+                        <span class="transformation-label">Before This Course</span>
+                    </div>
+                    <ul class="transformation-list">
+                        <li><span class="icon">❌</span> No AI skills whatsoever</li>
+                        <li><span class="icon">❌</span> Limited income opportunities</li>
+                        <li><span class="icon">❌</span> Confusion about the future</li>
+                        <li><span class="icon">❌</span> Falling behind others</li>
+                        <li><span class="icon">❌</span> Manual, time-consuming work</li>
+                    </ul>
+                </div>
+
+                <div class="transformation-arrow">→</div>
+
+                <div class="transformation-box after">
+                    <div class="transformation-header">
+                        <div class="transformation-icon">🚀</div>
+                        <span class="transformation-label">After This Course</span>
+                    </div>
+                    <ul class="transformation-list">
+                        <li><span class="icon">✅</span> AI-powered productivity</li>
+                        <li><span class="icon">✅</span> Multiple income streams</li>
+                        <li><span class="icon">✅</span> Confidence in digital skills</li>
+                        <li><span class="icon">✅</span> Ahead of 99% of people</li>
+                        <li><span class="icon">✅</span> Automated, efficient workflow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Modules Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">📚 Course Curriculum</span>
+                <h2 class="section-title">What You'll Master in 2 Weeks</h2>
+                <p class="section-subtitle">A complete, practical curriculum designed to take you from beginner to AI-powered professional.</p>
+            </div>
+
+            <div class="modules-grid">
+                <div class="module-card reveal">
+                    <div class="module-number">01</div>
+                    <div class="module-icon">🧠</div>
+                    <h3>AI Foundations</h3>
+                    <p>Understand what AI is, how it works, and why it matters for your future.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">02</div>
+                    <div class="module-icon">💬</div>
+                    <h3>ChatGPT Mastery</h3>
+                    <p>Learn to use ChatGPT like a pro for any task — writing, research, coding, and more.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">03</div>
+                    <div class="module-icon">✍️</div>
+                    <h3>Prompt Engineering</h3>
+                    <p>Master the art of writing prompts that get exactly the results you want.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">04</div>
+                    <div class="module-icon">📝</div>
+                    <h3>AI Content Creation</h3>
+                    <p>Create blog posts, social media content, scripts, and more in minutes.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">05</div>
+                    <div class="module-icon">📊</div>
+                    <h3>AI for Business</h3>
+                    <p>Automate tasks, analyze data, and make smarter business decisions.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">06</div>
+                    <div class="module-icon">🎨</div>
+                    <h3>Image & Video AI</h3>
+                    <p>Generate stunning visuals and videos using cutting-edge AI tools.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">07</div>
+                    <div class="module-icon">📢</div>
+                    <h3>Digital Marketing with AI</h3>
+                    <p>Create ads, copy, and marketing campaigns that convert.</p>
+                </div>
+                <div class="module-card reveal">
+                    <div class="module-number">08</div>
+                    <div class="module-icon">💵</div>
+                    <h3>Freelancing & Monetization</h3>
+                    <p>Turn your AI skills into real income through freelancing and digital products.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Stack Section -->
+    <section class="section value-section" id="payment">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">💎 Incredible Value</span>
+                <h2 class="section-title">Everything You Get Today</h2>
+            </div>
+
+            <div class="value-container">
+                <div class="value-pricing reveal">
+                    <div class="value-pricing-inner">
+                        <p class="global-value">Global Value: <span>$200+</span></p>
+                        <p class="regular-price">Regular Price: ₦30,000</p>
+                        <span class="promo-label">🔥 TODAY ONLY</span>
+                        <div class="promo-price">₦15,000</div>
+                        
+                        <div class="countdown-container">
+                            <div class="countdown-label">Price increases when timer ends:</div>
+                            <div class="countdown" id="valueCountdown">
+                                <div class="countdown-item">
+                                    <div class="countdown-number" id="value-days">02</div>
+                                    <div class="countdown-unit">Days</div>
+                                </div>
+                                <div class="countdown-item">
+                                    <div class="countdown-number" id="value-hours">18</div>
+                                    <div class="countdown-unit">Hours</div>
+                                </div>
+                                <div class="countdown-item">
+                                    <div class="countdown-number" id="value-minutes">45</div>
+                                    <div class="countdown-unit">Mins</div>
+                                </div>
+                                <div class="countdown-item">
+                                    <div class="countdown-number" id="value-seconds">30</div>
+                                    <div class="countdown-unit">Secs</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://paystack.com/pay/your-payment-link" class="cta-button" style="margin-top: 1.5rem;">
+                            <span class="icon">🚀</span>
+                            <span>Enroll Now at ₦15,000</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="value-bonuses reveal">
+                    <h3 class="bonuses-title">🎁 Plus These Exclusive Bonuses:</h3>
+                    <ul class="bonus-list">
+                        <li class="bonus-item">
+                            <div class="bonus-icon">📚</div>
+                            <div class="bonus-content">
+                                <h4>1-Year AI Resource Library</h4>
+                                <p>Curated tools, templates, and guides updated monthly.</p>
+                            </div>
+                        </li>
+                        <li class="bonus-item">
+                            <div class="bonus-icon">👥</div>
+                            <div class="bonus-content">
+                                <h4>Private Community Access</h4>
+                                <p>Network with like-minded learners and get support.</p>
+                            </div>
+                        </li>
+                        <li class="bonus-item">
+                            <div class="bonus-icon">🤝</div>
+                            <div class="bonus-content">
+                                <h4>Networking Opportunities</h4>
+                                <p>Connect with industry experts and potential clients.</p>
+                            </div>
+                        </li>
+                        <li class="bonus-item">
+                            <div class="bonus-icon">🏆</div>
+                            <div class="bonus-content">
+                                <h4>Certificate of Completion</h4>
+                                <p>Showcase your AI skills to employers and clients.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="community-content">
+                <div class="community-text reveal">
+                    <span class="section-badge">🤝 The Network</span>
+                    <h3>Your Network is Your Net Worth</h3>
+                    <p>Just like top schools are valuable because of the network they provide, this course connects you with a community of ambitious individuals learning how to earn and grow with AI.</p>
+                    
+                    <div class="community-features">
+                        <div class="community-feature">
+                            <div class="community-feature-icon">🤝</div>
+                            <h4>Collaboration</h4>
+                        </div>
+                        <div class="community-feature">
+                            <div class="community-feature-icon">💼</div>
+                            <h4>Opportunities</h4>
+                        </div>
+                        <div class="community-feature">
+                            <div class="community-feature-icon">🌟</div>
+                            <h4>Exposure</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="community-visual reveal">
+                    <div class="community-image">
+                        <div class="community-avatars">
+                            <div class="community-avatar">👨🏾</div>
+                            <div class="community-avatar">👩🏾</div>
+                            <div class="community-avatar">👨🏽</div>
+                            <div class="community-avatar">👩🏽</div>
+                            <div class="community-avatar">👨🏿</div>
+                        </div>
+                        <div class="community-count"><span>500+</span> Students</div>
+                        <p style="color: var(--text-secondary);">Join a growing community of AI enthusiasts</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Urgency Section -->
+    <section class="section urgency-section">
+        <div class="section-container">
+            <div class="urgency-content reveal">
+                <h2 class="urgency-title">⏰ Price Increases to <span>₦30,000</span> When Timer Expires</h2>
+                
+                <div class="urgency-countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="urgency-days">02</div>
+                        <div class="countdown-unit">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="urgency-hours">18</div>
+                        <div class="countdown-unit">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="urgency-minutes">45</div>
+                        <div class="countdown-unit">Mins</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="urgency-seconds">30</div>
+                        <div class="countdown-unit">Secs</div>
+                    </div>
+                </div>
+
+                <a href="#payment" class="cta-button">
+                    <span class="icon">🔥</span>
+                    <span>Lock In ₦15,000 Price Now</span>
+                </a>
+
+                <p class="urgency-microcopy">💡 People who delay often pay more later.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">🎯 Simple Process</span>
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Getting started is easy. Here's your path to AI mastery.</p>
+            </div>
+
+            <div class="steps-container reveal">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">💳</div>
+                    <h3>Make Payment</h3>
+                    <p>Secure your spot with our easy payment process.</p>
+                </div>
+                
+                <span class="step-arrow">→</span>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">🔓</div>
+                    <h3>Get Instant Access</h3>
+                    <p>Receive immediate access to all course materials.</p>
+                </div>
+                
+                <span class="step-arrow">→</span>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">🚀</div>
+                    <h3>Start Learning</h3>
+                    <p>Begin your AI journey and transform your skills.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">💬 Success Stories</span>
+                <h2 class="section-title">What Our Students Say</h2>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-content">"This course completely changed how I work and earn online. I went from spending hours on tasks to finishing them in minutes. The AI skills I learned helped me land 3 new clients!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨🏾</div>
+                        <div class="testimonial-info">
+                            <h4>Adewale O.</h4>
+                            <p>Freelance Writer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-content">"As a business owner, AI has become my secret weapon. I'm creating content, analyzing data, and automating tasks like never before. Best investment I made this year."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👩🏾</div>
+                        <div class="testimonial-info">
+                            <h4>Chioma N.</h4>
+                            <p>Business Owner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card reveal">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-content">"I was skeptical at first, but the practical approach of this course won me over. I'm now using AI in my daily work and even teaching my colleagues!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">👨🏽</div>
+                        <div class="testimonial-info">
+                            <h4>Emmanuel K.</h4>
+                            <p>Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">❓ Questions</span>
+                <h2 class="section-title">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Do I need any prior experience with AI or technology?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No! This course is designed for complete beginners. We start from the basics and gradually build up your skills. All you need is a willingness to learn.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Is this course completely online?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes, the entire course is online. You can learn from anywhere, anytime, at your own pace. All you need is an internet connection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Can I start anytime?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely! Once you enroll, you get instant access to all course materials. You can start immediately and learn at your own pace.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>Will I receive a certificate?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! Upon completing the course, you'll receive a Certificate of Completion that you can add to your LinkedIn profile or resume.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>How long do I have access to the course?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You get lifetime access to all course materials, including future updates. Learn once, benefit forever.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>What if I have questions during the course?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You'll have access to our private community where you can ask questions, get support, and connect with other students and instructors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="section-container reveal">
+            <h2 class="final-cta-title">
+                Your Future Will Either<br>
+                <span class="highlight">Thank You</span> — Or <span class="warning">Blame You</span>
+            </h2>
+            <p class="final-cta-subtitle">The choice you make today determines where you'll be tomorrow.</p>
+            
+            <a href="#payment" class="final-cta-button">
+                <span class="icon">🔥</span>
+                <span>Start My AI Journey Now</span>
+            </a>
+            
+            <p class="cta-subtext">Join the next generation of AI earners. Only ₦15,000 today.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">ZUBEG IDEAL TECH HUB</div>
+            <p class="footer-tagline">We are a tech hub focused on empowering individuals with digital skills, opportunities, and growth.</p>
+            <div class="footer-contact">
+                <a href="mailto:zubegenterprise@gmail.com">📧 zubegenterprise@gmail.com</a>
+            </div>
+            <p class="footer-copyright">© 2024 Zubeg Ideal Enterprise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Particle Generation
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.width = (Math.random() * 4 + 2) + 'px';
+                particle.style.height = particle.style.width;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Progress Indicator
+        const scrollIndicator = document.getElementById('scrollIndicator');
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            scrollIndicator.style.width = scrollPercent + '%';
+        });
+
+        // Countdown Timer
+        function startCountdown() {
+            // Set the countdown date (3 days from now)
+            const now = new Date();
+            const countdownDate = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000);
+
+            function updateCountdown() {
+                const currentTime = new Date().getTime();
+                const distance = countdownDate - currentTime;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update all countdown displays
+                const prefixes = ['hero', 'value', 'urgency'];
+                prefixes.forEach(prefix => {
+                    const daysEl = document.getElementById(`${prefix}-days`);
+                    const hoursEl = document.getElementById(`${prefix}-hours`);
+                    const minutesEl = document.getElementById(`${prefix}-minutes`);
+                    const secondsEl = document.getElementById(`${prefix}-seconds`);
+
+                    if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+                    if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+                    if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+                    if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+                });
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                }
+            }
+
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        startCountdown();
+
+        // Scroll Reveal Animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const revealPoint = 150;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', reveal);
+        reveal(); // Initial check
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQs
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current FAQ
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth Scroll for CTA buttons
+        function scrollToPayment() {
+            document.getElementById('payment').scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }
+
+        // Add click handlers to all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            });
+        });
+
+        // Button Ripple Effect
+        document.querySelectorAll('.cta-button, .final-cta-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    width: 100px;
+                    height: 100px;
+                    left: ${e.clientX - rect.left - 50}px;
+                    top: ${e.clientY - rect.top - 50}px;
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                from {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection Observer for enhanced animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.module-card, .opportunity-card, .problem-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Console Easter Egg
+        console.log('%c🚀 ZUBEG IDEAL TECH HUB', 'font-size: 24px; font-weight: bold; color: #667eea;');
+        console.log('%cMaster AI. Control Your Future.', 'font-size: 14px; color: #a855f7;');
+    </script>
+</body>
+</html>
