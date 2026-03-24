@@ -1270,56 +1270,30 @@
 
 
 
-<div class="flex justify-between items-center pb-4 border-b border-white/10">
-  <div class="flex items-center space-x-4">
-    
-    <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center animate-pulse">
-      <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
-        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-      </svg>
-    </div>
+                        <div class="flex justify-between items-center pb-4 border-b border-white/10">
+                        <div class="flex items-center space-x-4">
+                            
+                            <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center animate-pulse">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                            </svg>
+                            </div>
 
-    <p class="text-white font-semibold transition-all duration-500">
-      1-Year AI Resource Library
-    </p> 
+                            <p class="text-white font-semibold transition-all duration-500">
+                            1-Year AI Resource Library
+                            </p> 
 
 
-    <!-- Animated Text -->
-    <span id="libraryText" class="text-white font-semibold transition-all duration-500">
-      1-Year AI Resource Library
-    </span>
+                            <!-- Animated Text -->
+                            <span id="libraryText" class="text-white font-semibold transition-all duration-500">
+                            1-Year AI Resource Library
+                            </span>
 
-  </div>
+                        </div>
 
-  <span class="text-gray-400 line-through">$50</span>
-</div>
+                        <span class="text-gray-400 line-through">$50</span>
+                        </div>
 
-<script>
-const texts = [
-  "1-Year Access to AI PDFs & ML Materials",
-  "Copy & Paste Prompt Library",
-  "AI Job Sources (Creators & Animators)",
-  "Strong Student Support System",
-  "Ever-Updating Resources & Tools",
-  "Cheap Software + Usage Hacks",
-  "Weekly Updates on What Works",
-  "Job Recommendations After Graduation"
-];
-
-let index = 0;
-const textElement = document.getElementById("libraryText");
-
-setInterval(() => {
-  textElement.classList.add("opacity-0", "translate-y-2");
-
-  setTimeout(() => {
-    index = (index + 1) % texts.length;
-    textElement.textContent = texts[index];
-    textElement.classList.remove("opacity-0", "translate-y-2");
-  }, 300);
-
-}, 3000);
-</script>
 
 
 
@@ -1992,42 +1966,69 @@ setInterval(() => {
     </div>
 
     <!-- JavaScript -->
+     
     <script>
-        const triggers = [
-            { id: "card1", showAt: 10, anim: "show-slide" },
-            { id: "card2", showAt: 30, anim: "show-scale" },
-            { id: "card3", showAt: 50, anim: "show-slide" },
-            { id: "card4", showAt: 70, anim: "show-scale" },
-            { id: "card5", showAt: 85, anim: "show-slide" }
+        const texts = [
+        "1-Year Access to AI PDFs & ML Materials",
+        "Copy & Paste Prompt Library",
+        "AI Job Sources (Creators & Animators)",
+        "Strong Student Support System",
+        "Ever-Updating Resources & Tools",
+        "Cheap Software + Usage Hacks",
+        "Weekly Updates on What Works",
+        "Job Recommendations After Graduation"
         ];
 
-        let shown = {};
+        let index = 0;
+        const textElement = document.getElementById("libraryText");
 
-        window.addEventListener("scroll", () => {
-            const scrollTop = window.scrollY;
+        setInterval(() => {
+        textElement.classList.add("opacity-0", "translate-y-2");
 
-            const docHeight = document.body.scrollHeight - window.innerHeight;
+        setTimeout(() => {
+            index = (index + 1) % texts.length;
+            textElement.textContent = texts[index];
+            textElement.classList.remove("opacity-0", "translate-y-2");
+        }, 300);
 
-            // ✅ FIX: Prevent division by zero
-            if (docHeight <= 0) return;
+        }, 3000);
+        </script>
+        <script>
+            const triggers = [
+                { id: "card1", showAt: 10, anim: "show-slide" },
+                { id: "card2", showAt: 30, anim: "show-scale" },
+                { id: "card3", showAt: 50, anim: "show-slide" },
+                { id: "card4", showAt: 70, anim: "show-scale" },
+                { id: "card5", showAt: 85, anim: "show-slide" }
+            ];
 
-            const scrollPercent = (scrollTop / docHeight) * 100;
+            let shown = {};
 
-            triggers.forEach((item) => {
-                if (scrollPercent >= item.showAt && !shown[item.id]) {
-                    const el = document.getElementById(item.id);
+            window.addEventListener("scroll", () => {
+                const scrollTop = window.scrollY;
 
-                    if (!el) return; // extra safety
+                const docHeight = document.body.scrollHeight - window.innerHeight;
 
-                    el.classList.add(item.anim, "flash");
-                    shown[item.id] = true;
+                // ✅ FIX: Prevent division by zero
+                if (docHeight <= 0) return;
 
-                    setTimeout(() => {
-                        el.classList.remove(item.anim);
-                    }, 10000);
-                }
+                const scrollPercent = (scrollTop / docHeight) * 100;
+
+                triggers.forEach((item) => {
+                    if (scrollPercent >= item.showAt && !shown[item.id]) {
+                        const el = document.getElementById(item.id);
+
+                        if (!el) return; // extra safety
+
+                        el.classList.add(item.anim, "flash");
+                        shown[item.id] = true;
+
+                        setTimeout(() => {
+                            el.classList.remove(item.anim);
+                        }, 10000);
+                    }
+                });
             });
-        });
     </script>
 
     <script>
