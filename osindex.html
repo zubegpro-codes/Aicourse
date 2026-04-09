@@ -1,0 +1,3195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Operating Systems | Zubeg Ideal Tech Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== CSS RESET & VARIABLES ==================== */
+        :root {
+            --primary: #6C63FF;
+            --primary-light: #8B85FF;
+            --primary-dark: #5046E5;
+            --secondary: #FF6B9D;
+            --accent: #00D9B5;
+            --accent-2: #FFB547;
+            --bg-light: #F8F9FF;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --shadow: 0 10px 40px rgba(108, 99, 255, 0.15);
+            --shadow-hover: 0 20px 60px rgba(108, 99, 255, 0.25);
+            --radius: 20px;
+            --radius-sm: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Fredoka One', cursive;
+            font-weight: 400;
+        }
+
+        /* ==================== NAVIGATION ==================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--bg-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 80%;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* ==================== HERO SECTION ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 2rem 4rem;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 50%, #f0e6ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+            bottom: -100px;
+            left: -100px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--bg-gradient);
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Hero Illustration */
+        .hero-illustration {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .devices-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            aspect-ratio: 1;
+        }
+
+        .device {
+            position: absolute;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .laptop {
+            width: 280px;
+            height: 180px;
+            top: 50%;
+            left: 20%;
+            transform: translateY(-50%);
+            animation: laptopFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes laptopFloat {
+            0%, 100% { transform: translateY(-50%) rotate(-2deg); }
+            50% { transform: translateY(calc(-50% - 15px)) rotate(2deg); }
+        }
+
+        .phone {
+            width: 100px;
+            height: 180px;
+            bottom: 20%;
+            right: 15%;
+            animation: phoneFloat 3s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes phoneFloat {
+            0%, 100% { transform: rotate(5deg); }
+            50% { transform: translateY(-20px) rotate(-5deg); }
+        }
+
+        .device-screen {
+            width: 85%;
+            height: 70%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            overflow: hidden;
+        }
+
+        .screen-icon {
+            font-size: 2rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .screen-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .screen-dots span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        .screen-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .screen-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.5; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .device-base {
+            width: 60%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 0 0 5px 5px;
+            margin-top: 5px;
+        }
+
+        .home-button {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+
+        /* Connection Lines */
+        .connection-line {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 2px;
+            overflow: visible;
+        }
+
+        .connection-line svg {
+            width: 150px;
+            height: 60px;
+            position: absolute;
+            top: -30px;
+        }
+
+        .data-particle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dataFlow 2s linear infinite;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @keyframes dataFlow {
+            0% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-icon {
+            position: absolute;
+            font-size: 2rem;
+            animation: floatAround 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-icon:nth-child(2) { top: 20%; right: 10%; animation-delay: 1s; }
+        .floating-icon:nth-child(3) { bottom: 30%; left: 5%; animation-delay: 2s; }
+        .floating-icon:nth-child(4) { bottom: 10%; right: 20%; animation-delay: 3s; }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(10deg); }
+            50% { transform: translateY(-10px) rotate(-5deg); }
+            75% { transform: translateY(-25px) rotate(5deg); }
+        }
+
+        /* ==================== SECTION STYLES ==================== */
+        section {
+            padding: 6rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ==================== WHAT IS OS SECTION ==================== */
+        .what-is-os {
+            background: var(--white);
+        }
+
+        .os-explanation {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .explanation-content {
+            padding: 2rem;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #f0e6ff 0%, #e8ecff 100%);
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary);
+        }
+
+        .analogy-box h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .analogy-box p {
+            color: var(--text-dark);
+            font-size: 1.1rem;
+        }
+
+        .key-points {
+            list-style: none;
+        }
+
+        .key-points li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .key-points li:last-child {
+            border-bottom: none;
+        }
+
+        .point-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, #00B894 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .point-text h4 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .point-text p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Interactive Diagram */
+        .interactive-diagram {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .diagram-title {
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .diagram-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .diagram-node {
+            background: var(--white);
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            width: 80%;
+            max-width: 250px;
+        }
+
+        .diagram-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .diagram-node.active {
+            transform: scale(1.08);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .node-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .node-label {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .node-tooltip {
+            position: absolute;
+            bottom: calc(100% + 15px);
+            left: 50%;
+            transform: translateX(-50%) scale(0.9);
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .node-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--text-dark);
+        }
+
+        .diagram-node:hover .node-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) scale(1);
+        }
+
+        .diagram-arrow {
+            font-size: 1.5rem;
+            color: var(--white);
+            animation: arrowPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateY(0); opacity: 0.7; }
+            50% { transform: translateY(5px); opacity: 1; }
+        }
+
+        /* ==================== OS TYPES SECTION ==================== */
+        .os-types {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+        }
+
+        .os-cards-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .os-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .os-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--card-color, var(--primary));
+        }
+
+        .os-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .os-card.expanded {
+            grid-column: span 2;
+        }
+
+        .os-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .os-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--card-color, var(--primary)) 0%, var(--card-color-light, var(--primary-light)) 100%);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .os-card-title {
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+        }
+
+        .os-card-brief {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .os-card-details {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .os-card.expanded .os-card-details {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .os-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .os-feature {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .expand-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .expand-btn:hover {
+            gap: 10px;
+        }
+
+        /* ==================== HOW OS WORKS SECTION ==================== */
+        .how-os-works {
+            background: var(--white);
+        }
+
+        .simulation-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .simulation-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .simulation-intro p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .simulation-area {
+            background: linear-gradient(135deg, #2D3748 0%, #1a202c 100%);
+            border-radius: var(--radius);
+            padding: 3rem;
+            position: relative;
+        }
+
+        .simulation-screen {
+            background: #1a1a2e;
+            border-radius: var(--radius-sm);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .simulation-prompt {
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .simulation-output {
+            margin-top: 1rem;
+        }
+
+        .output-line {
+            color: #a0aec0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+            padding: 0.3rem 0;
+            opacity: 0;
+            animation: typeIn 0.5s ease forwards;
+        }
+
+        @keyframes typeIn {
+            to { opacity: 1; }
+        }
+
+        .simulation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .sim-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sim-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+        }
+
+        .sim-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #00B894 100%);
+        }
+
+        /* Process Animation */
+        .process-visualization {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+        }
+
+        .process-visualization.active {
+            display: flex;
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-sm);
+            color: var(--white);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.5s ease;
+        }
+
+        .process-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .process-step-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .process-step.complete .process-step-icon {
+            background: var(--accent);
+        }
+
+        /* ==================== COMPARISON SECTION ==================== */
+        .comparison {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+        }
+
+        .comparison .section-title,
+        .comparison .section-subtitle {
+            color: var(--white);
+        }
+
+        .comparison .section-badge {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .comparison-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .comparison-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .comparison-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .comparison-card-title {
+            font-size: 1.8rem;
+        }
+
+        .comparison-features {
+            list-style: none;
+        }
+
+        .comparison-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .comparison-highlight {
+            margin-top: 3rem;
+        }
+
+        .similarities-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .similarities-box h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .similarity-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .similarity-tag {
+            background: var(--white);
+            color: var(--primary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ==================== FUN LEARNING SECTION ==================== */
+        .fun-learning {
+            background: var(--white);
+        }
+
+        .learning-tabs {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--bg-light);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tab-btn:hover {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+        }
+
+        .tab-btn.active {
+            background: var(--bg-gradient);
+            color: var(--white);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+            border-radius: var(--radius);
+            padding: 3rem;
+        }
+
+        .quiz-progress {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--bg-gradient);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quiz-question {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .quiz-option {
+            background: var(--white);
+            border: 2px solid transparent;
+            padding: 1.2rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+        }
+
+        .quiz-option.correct {
+            border-color: var(--accent);
+            background: rgba(0, 217, 181, 0.1);
+        }
+
+        .quiz-option.incorrect {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            background: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .quiz-feedback {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: var(--radius-sm);
+            display: none;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+            animation: bounceIn 0.5s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(0, 217, 181, 0.2);
+            color: #00B894;
+        }
+
+        .quiz-feedback.incorrect {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Drag and Drop Styles */
+        .drag-drop-container {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+            border-radius: var(--radius);
+            padding: 3rem;
+        }
+
+        .drag-instruction {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .drag-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .drag-item {
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            user-select: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drag-item:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .drag-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .drop-zones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .drop-zone {
+            background: var(--white);
+            border: 3px dashed #cbd5e0;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            min-height: 150px;
+            transition: var(--transition);
+        }
+
+        .drop-zone.drag-over {
+            border-color: var(--primary);
+            background: rgba(108, 99, 255, 0.05);
+        }
+
+        .drop-zone-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .drop-zone-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .dropped-item {
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+            padding: 0.8rem 1rem;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: popIn 0.3s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            color: #ff6b6b;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .drag-score {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        /* Matching Game */
+        .matching-container {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+            border-radius: var(--radius);
+            padding: 3rem;
+        }
+
+        .matching-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .match-card {
+            aspect-ratio: 1;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .match-card:hover {
+            transform: scale(1.05);
+        }
+
+        .match-card.selected {
+            border: 3px solid var(--primary);
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(255, 107, 157, 0.1) 100%);
+        }
+
+        .match-card.matched {
+            background: rgba(0, 217, 181, 0.2);
+            border: 3px solid var(--accent);
+            cursor: default;
+        }
+
+        .match-card.wrong {
+            animation: shake 0.5s ease;
+            border: 3px solid #ff6b6b;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .match-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .match-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .matching-score {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ==================== VISUAL EXPLANATIONS ==================== */
+        .visual-explanations {
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+        }
+
+        .visual-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .visual-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .visual-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .visual-animation {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: var(--radius-sm);
+            height: 200px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* File System Animation */
+        .file-system-viz {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .folder-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: folderPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes folderPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .file-items {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .file-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            animation: fileAppear 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .file-item:nth-child(1) { animation-delay: 0.5s; }
+        .file-item:nth-child(2) { animation-delay: 1s; }
+        .file-item:nth-child(3) { animation-delay: 1.5s; }
+
+        @keyframes fileAppear {
+            to { opacity: 1; }
+        }
+
+        /* Memory Animation */
+        .memory-viz {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            padding: 1rem;
+        }
+
+        .memory-block {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            animation: memoryFill 3s ease-in-out infinite;
+        }
+
+        @keyframes memoryFill {
+            0%, 100% { background: rgba(255, 255, 255, 0.2); }
+            50% { background: var(--accent); }
+        }
+
+        .memory-block:nth-child(odd) { animation-delay: 0.5s; }
+        .memory-block:nth-child(3n) { animation-delay: 1s; }
+
+        /* CPU Animation */
+        .cpu-viz {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+
+        .cpu-core {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            position: relative;
+        }
+
+        .cpu-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--accent);
+            border-radius: var(--radius-sm);
+            animation: cpuPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes cpuPulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        .cpu-tasks {
+            display: flex;
+            gap: 5px;
+            margin-top: 1rem;
+        }
+
+        .cpu-task {
+            width: 10px;
+            height: 30px;
+            background: var(--accent);
+            border-radius: 3px;
+            animation: taskProcess 0.5s ease-in-out infinite;
+        }
+
+        .cpu-task:nth-child(1) { animation-delay: 0s; height: 20px; }
+        .cpu-task:nth-child(2) { animation-delay: 0.1s; height: 35px; }
+        .cpu-task:nth-child(3) { animation-delay: 0.2s; height: 25px; }
+        .cpu-task:nth-child(4) { animation-delay: 0.3s; height: 40px; }
+        .cpu-task:nth-child(5) { animation-delay: 0.4s; height: 30px; }
+
+        @keyframes taskProcess {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .visual-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .visual-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* ==================== WHY OS MATTERS ==================== */
+        .why-os-matters {
+            background: var(--white);
+        }
+
+        .stories-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .story-card {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0e6ff 100%);
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+        }
+
+        .story-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .story-illustration {
+            flex: 1;
+            text-align: center;
+        }
+
+        .story-icon {
+            font-size: 8rem;
+            animation: storyFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes storyFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .story-content {
+            flex: 1;
+        }
+
+        .story-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .story-content p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .story-highlight {
+            background: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-sm);
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .story-highlight p {
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background: linear-gradient(135deg, #2D3748 0%, #1a202c 100%);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+
+        .footer-brand p {
+            color: #a0aec0;
+            line-height: 1.7;
+        }
+
+        .footer-links h4 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--white);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #718096;
+            font-size: 0.95rem;
+        }
+
+        .footer-bottom .highlight {
+            color: var(--primary-light);
+            font-weight: 700;
+        }
+
+        /* ==================== SCROLL PROGRESS ==================== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--bg-gradient);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* ==================== BACK TO TOP ==================== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-gradient);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* ==================== RESPONSIVE DESIGN ==================== */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .devices-container {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .os-explanation {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .story-card {
+                flex-direction: column !important;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .laptop {
+                width: 200px;
+                height: 130px;
+                left: 10%;
+            }
+
+            .phone {
+                width: 80px;
+                height: 140px;
+            }
+
+            .os-card.expanded {
+                grid-column: span 1;
+            }
+
+            .simulation-buttons {
+                flex-direction: column;
+            }
+
+            .sim-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .matching-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .match-card {
+                padding: 0.5rem;
+            }
+
+            .match-icon {
+                font-size: 1.5rem;
+            }
+
+            .match-label {
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: 4rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .visual-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .matching-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ==================== LOADING ANIMATION ==================== */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-icon {
+            font-size: 4rem;
+            animation: loaderBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes loaderBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .loader-text {
+            margin-top: 1rem;
+            font-family: 'Fredoka One', cursive;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        /* ==================== CONFETTI ANIMATION ==================== */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            animation: confettiFall 3s ease-out forwards;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-icon">💻</div>
+            <div class="loader-text">Loading OS World...</div>
+        </div>
+    </div>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🖥️</div>
+                <span>OS Explorer by ZUBEG IDEAL TECH HUB</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#what-is-os">What is OS?</a></li>
+                <li><a href="#os-types">Types</a></li>
+                <li><a href="#how-it-works">How it Works</a></li>
+                <li><a href="#comparison">Compare</a></li>
+                <li><a href="#fun-learning">Learn & Play</a></li>
+            </ul>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Learn Operating Systems the Fun Way! 🚀</h1>
+                <p>Discover how your phone and computer really work with fun animations, interactive games, and easy-to-understand explanations!</p>
+                <div class="hero-buttons">
+                    <a href="#what-is-os" class="btn btn-primary">
+                        <span>Start Learning</span>
+                        <span>▶️</span>
+                    </a>
+                    <a href="#fun-learning" class="btn btn-secondary">
+                        <span>Play Games</span>
+                        <span>🎮</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-illustration">
+                <div class="devices-container">
+                    <div class="device laptop">
+                        <div class="device-screen">
+                            <div class="screen-icon">💻</div>
+                            <div class="screen-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="device-base"></div>
+                    </div>
+                    <div class="device phone">
+                        <div class="device-screen">
+                            <div class="screen-icon">📱</div>
+                            <div class="screen-dots">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                        <div class="home-button"></div>
+                    </div>
+                    <div class="connection-line">
+                        <div class="data-particle" style="animation-delay: 0s;"></div>
+                        <div class="data-particle" style="animation-delay: 0.5s;"></div>
+                        <div class="data-particle" style="animation-delay: 1s;"></div>
+                    </div>
+                    <div class="floating-elements">
+                        <span class="floating-icon">⚡</span>
+                        <span class="floating-icon">🔧</span>
+                        <span class="floating-icon">📁</span>
+                        <span class="floating-icon">🎯</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What is an OS Section -->
+    <section class="what-is-os" id="what-is-os">
+        <div class="section-header">
+            <span class="section-badge">📚 Basic Concept</span>
+            <h2 class="section-title">What is an Operating System?</h2>
+            <p class="section-subtitle">Think of it as the super-smart manager of your device!</p>
+        </div>
+        
+        <div class="os-explanation">
+            <div class="explanation-content">
+                <div class="analogy-box">
+                    <h3>💡 Imagine This!</h3>
+                    <p>An Operating System (OS) is like a <strong>school principal</strong>! Just like how a principal manages teachers, students, and classrooms, an OS manages all the parts of your computer or phone to make sure everything runs smoothly!</p>
+                </div>
+                
+                <ul class="key-points">
+                    <li>
+                        <div class="point-icon">🎮</div>
+                        <div class="point-text">
+                            <h4>Controls Everything</h4>
+                            <p>The OS talks to your screen, keyboard, camera, and all other parts!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="point-icon">📱</div>
+                        <div class="point-text">
+                            <h4>Runs Your Apps</h4>
+                            <p>Games, YouTube, and all your favorite apps work because of the OS!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="point-icon">💾</div>
+                        <div class="point-text">
+                            <h4>Saves Your Stuff</h4>
+                            <p>Photos, videos, and files are organized and kept safe by the OS!</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="point-icon">🔒</div>
+                        <div class="point-text">
+                            <h4>Keeps You Safe</h4>
+                            <p>The OS protects your device from bad programs and hackers!</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="interactive-diagram">
+                <h3 class="diagram-title">🔄 How It All Connects</h3>
+                <p style="color: rgba(255,255,255,0.8); text-align: center; margin-bottom: 1rem;">Click each part to learn more!</p>
+                <div class="diagram-flow">
+                    <div class="diagram-node" data-info="user">
+                        <div class="node-icon">👤</div>
+                        <div class="node-label">You (The User)</div>
+                        <div class="node-tooltip">You give commands like clicking, typing, or tapping!</div>
+                    </div>
+                    <div class="diagram-arrow">⬇️</div>
+                    <div class="diagram-node" data-info="os">
+                        <div class="node-icon">⚙️</div>
+                        <div class="node-label">Operating System</div>
+                        <div class="node-tooltip">The OS understands your commands and tells the hardware what to do!</div>
+                    </div>
+                    <div class="diagram-arrow">⬇️</div>
+                    <div class="diagram-node" data-info="hardware">
+                        <div class="node-icon">🖥️</div>
+                        <div class="node-label">Hardware</div>
+                        <div class="node-tooltip">The physical parts like screen, speakers, and memory that do the work!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Types of OS Section -->
+    <section class="os-types" id="os-types">
+        <div class="section-header">
+            <span class="section-badge">🗂️ Explore</span>
+            <h2 class="section-title">Types of Operating Systems</h2>
+            <p class="section-subtitle">Click on each card to discover different operating systems!</p>
+        </div>
+        
+        <div class="os-cards-grid">
+            <div class="os-card" style="--card-color: #0078D4; --card-color-light: #50a7f5;">
+                <div class="os-card-header">
+                    <div class="os-icon">🪟</div>
+                    <h3 class="os-card-title">Windows</h3>
+                </div>
+                <p class="os-card-brief">The most popular OS for laptops and desktop computers!</p>
+                <button class="expand-btn">Learn More <span>→</span></button>
+                <div class="os-card-details">
+                    <p>Windows is made by Microsoft and used by millions of people around the world. You can play games, do homework, and watch videos on Windows computers!</p>
+                    <div class="os-features">
+                        <span class="os-feature">🎮 Great for Gaming</span>
+                        <span class="os-feature">💼 Used in Offices</span>
+                        <span class="os-feature">🖱️ Easy to Use</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="os-card" style="--card-color: #555555; --card-color-light: #888888;">
+                <div class="os-card-header">
+                    <div class="os-icon">🍎</div>
+                    <h3 class="os-card-title">macOS</h3>
+                </div>
+                <p class="os-card-brief">Apple's beautiful OS for MacBooks and iMacs!</p>
+                <button class="expand-btn">Learn More <span>→</span></button>
+                <div class="os-card-details">
+                    <p>macOS runs on Apple computers. It's known for being very smooth and great for creative work like making music, art, and videos!</p>
+                    <div class="os-features">
+                        <span class="os-feature">🎨 Great for Creativity</span>
+                        <span class="os-feature">✨ Super Smooth</span>
+                        <span class="os-feature">🔒 Very Secure</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="os-card" style="--card-color: #FCC624; --card-color-light: #ffdb58;">
+                <div class="os-card-header">
+                    <div class="os-icon">🐧</div>
+                    <h3 class="os-card-title">Linux</h3>
+                </div>
+                <p class="os-card-brief">A free and open OS loved by programmers!</p>
+                <button class="expand-btn">Learn More <span>→</span></button>
+                <div class="os-card-details">
+                    <p>Linux is completely free and anyone can see how it works! It powers most of the internet's servers and is loved by people who like to customize everything!</p>
+                    <div class="os-features">
+                        <span class="os-feature">🆓 Totally Free</span>
+                        <span class="os-feature">🔧 Super Customizable</span>
+                        <span class="os-feature">💪 Very Powerful</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="os-card" style="--card-color: #3DDC84; --card-color-light: #6ae9a7;">
+                <div class="os-card-header">
+                    <div class="os-icon">🤖</div>
+                    <h3 class="os-card-title">Android</h3>
+                </div>
+                <p class="os-card-brief">The most used OS on phones worldwide!</p>
+                <button class="expand-btn">Learn More <span>→</span></button>
+                <div class="os-card-details">
+                    <p>Android is made by Google and runs on Samsung, Xiaomi, and many other phone brands. You can download millions of apps from the Play Store!</p>
+                    <div class="os-features">
+                        <span class="os-feature">📱 For Phones & Tablets</span>
+                        <span class="os-feature">🏪 Millions of Apps</span>
+                        <span class="os-feature">🎨 Lots of Choices</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="os-card" style="--card-color: #007AFF; --card-color-light: #4da6ff;">
+                <div class="os-card-header">
+                    <div class="os-icon">📱</div>
+                    <h3 class="os-card-title">iOS</h3>
+                </div>
+                <p class="os-card-brief">Apple's sleek OS for iPhones and iPads!</p>
+                <button class="expand-btn">Learn More <span>→</span></button>
+                <div class="os-card-details">
+                    <p>iOS is made by Apple and only runs on iPhones and iPads. It's known for being very smooth, secure, and having high-quality apps!</p>
+                    <div class="os-features">
+                        <span class="os-feature">🔐 Super Secure</span>
+                        <span class="os-feature">✨ Premium Apps</span>
+                        <span class="os-feature">🔄 Works with Mac</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How OS Works Section -->
+    <section class="how-os-works" id="how-it-works">
+        <div class="section-header">
+            <span class="section-badge">⚡ Interactive</span>
+            <h2 class="section-title">How Does an OS Work?</h2>
+            <p class="section-subtitle">Click the buttons below to see what happens inside your device!</p>
+        </div>
+        
+        <div class="simulation-container">
+            <div class="simulation-area">
+                <div class="simulation-screen">
+                    <div class="simulation-prompt" id="sim-prompt">
+                        👆 Click a button below to see the magic happen!
+                    </div>
+                    <div class="simulation-output" id="sim-output"></div>
+                    <div class="process-visualization" id="process-viz"></div>
+                </div>
+                <div class="simulation-buttons">
+                    <button class="sim-btn" onclick="simulateProcess('app')">
+                        <span>📱</span>
+                        <span>Open an App</span>
+                    </button>
+                    <button class="sim-btn" onclick="simulateProcess('file')">
+                        <span>📁</span>
+                        <span>Save a File</span>
+                    </button>
+                    <button class="sim-btn" onclick="simulateProcess('music')">
+                        <span>🎵</span>
+                        <span>Play Music</span>
+                    </button>
+                    <button class="sim-btn" onclick="simulateProcess('photo')">
+                        <span>📸</span>
+                        <span>Take a Photo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Laptop vs Phone Comparison -->
+    <section class="comparison" id="comparison">
+        <div class="section-header">
+            <span class="section-badge">⚖️ Compare</span>
+            <h2 class="section-title">Laptop OS vs Phone OS</h2>
+            <p class="section-subtitle">Let's see how they're different and similar!</p>
+        </div>
+        
+        <div class="comparison-container">
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <div class="comparison-card-header">
+                        <div class="comparison-icon">💻</div>
+                        <h3 class="comparison-card-title">Laptop OS</h3>
+                    </div>
+                    <ul class="comparison-features">
+                        <li>
+                            <div class="feature-icon">🖱️</div>
+                            <span>Uses mouse and keyboard</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">📺</div>
+                            <span>Big screen for more work</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">💪</div>
+                            <span>More powerful for big tasks</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">📂</div>
+                            <span>Files easy to organize</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">🎮</div>
+                            <span>Better for gaming & coding</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-card">
+                    <div class="comparison-card-header">
+                        <div class="comparison-icon">📱</div>
+                        <h3 class="comparison-card-title">Phone OS</h3>
+                    </div>
+                    <ul class="comparison-features">
+                        <li>
+                            <div class="feature-icon">👆</div>
+                            <span>Touch screen controls</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">🎒</div>
+                            <span>Fits in your pocket</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">🔋</div>
+                            <span>Saves battery smartly</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">📲</div>
+                            <span>Apps from app stores</span>
+                        </li>
+                        <li>
+                            <div class="feature-icon">📞</div>
+                            <span>Can make calls & texts</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="comparison-highlight">
+                <div class="similarities-box">
+                    <h3>🤝 What They Have in Common</h3>
+                    <div class="similarity-tags">
+                        <span class="similarity-tag">
+                            <span>📱</span>
+                            <span>Run Apps</span>
+                        </span>
+                        <span class="similarity-tag">
+                            <span>🌐</span>
+                            <span>Browse Internet</span>
+                        </span>
+                        <span class="similarity-tag">
+                            <span>💾</span>
+                            <span>Store Files</span>
+                        </span>
+                        <span class="similarity-tag">
+                            <span>🔒</span>
+                            <span>Keep You Safe</span>
+                        </span>
+                        <span class="similarity-tag">
+                            <span>🔄</span>
+                            <span>Get Updates</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Learning Section -->
+    <section class="fun-learning" id="fun-learning">
+        <div class="section-header">
+            <span class="section-badge">🎮 Fun Zone</span>
+            <h2 class="section-title">Learn by Playing!</h2>
+            <p class="section-subtitle">Test your knowledge with fun activities!</p>
+        </div>
+        
+        <div class="learning-tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab('quiz')">
+                    <span>❓</span>
+                    <span>Quiz Time</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('dragdrop')">
+                    <span>🎯</span>
+                    <span>Drag & Drop</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('matching')">
+                    <span>🔗</span>
+                    <span>Match Game</span>
+                </button>
+            </div>
+            
+            <!-- Quiz Tab -->
+            <div class="tab-content active" id="quiz-tab">
+                <div class="quiz-container">
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="quiz-progress" style="width: 20%;"></div>
+                        </div>
+                        <span class="progress-text" id="quiz-progress-text">1/5</span>
+                    </div>
+                    
+                    <div class="quiz-question" id="quiz-question">
+                        What does OS stand for?
+                    </div>
+                    
+                    <div class="quiz-options" id="quiz-options">
+                        <!-- Options will be inserted by JavaScript -->
+                    </div>
+                    
+                    <div class="quiz-feedback" id="quiz-feedback"></div>
+                    
+                    <div class="quiz-nav">
+                        <button class="btn btn-primary" id="quiz-next" onclick="nextQuestion()" style="display: none;">
+                            Next Question →
+                        </button>
+                        <button class="btn btn-secondary" id="quiz-restart" onclick="restartQuiz()" style="display: none;">
+                            🔄 Play Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Drag and Drop Tab -->
+            <div class="tab-content" id="dragdrop-tab">
+                <div class="drag-drop-container">
+                    <p class="drag-instruction">🎯 Drag each item to the correct category!</p>
+                    
+                    <div class="drag-items" id="drag-items">
+                        <div class="drag-item" draggable="true" data-category="hardware">🖥️ Monitor</div>
+                        <div class="drag-item" draggable="true" data-category="software">📝 Word Processor</div>
+                        <div class="drag-item" draggable="true" data-category="hardware">⌨️ Keyboard</div>
+                        <div class="drag-item" draggable="true" data-category="software">🎮 Video Game</div>
+                        <div class="drag-item" draggable="true" data-category="hardware">🖱️ Mouse</div>
+                        <div class="drag-item" draggable="true" data-category="software">🌐 Web Browser</div>
+                    </div>
+                    
+                    <div class="drop-zones">
+                        <div class="drop-zone" id="hardware-zone" data-category="hardware">
+                            <div class="drop-zone-title">
+                                <span>🔧</span>
+                                <span>Hardware</span>
+                            </div>
+                            <div class="drop-zone-items"></div>
+                        </div>
+                        <div class="drop-zone" id="software-zone" data-category="software">
+                            <div class="drop-zone-title">
+                                <span>💿</span>
+                                <span>Software</span>
+                            </div>
+                            <div class="drop-zone-items"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="drag-score" id="drag-score"></div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-secondary" onclick="resetDragDrop()">🔄 Reset</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Matching Game Tab -->
+            <div class="tab-content" id="matching-tab">
+                <div class="matching-container">
+                    <p class="drag-instruction">🔗 Click two cards that belong together!</p>
+                    
+                    <div class="matching-grid" id="matching-grid">
+                        <!-- Cards will be inserted by JavaScript -->
+                    </div>
+                    
+                    <div class="matching-score" id="matching-score">Matches: 0/6</div>
+                    <div style="text-align: center; margin-top: 1rem;">
+                        <button class="btn btn-secondary" onclick="resetMatching()">🔄 New Game</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Explanations Section -->
+    <section class="visual-explanations" id="visual">
+        <div class="section-header">
+            <span class="section-badge">🎨 Visual</span>
+            <h2 class="section-title">See How Things Work</h2>
+            <p class="section-subtitle">Watch these cool animations to understand better!</p>
+        </div>
+        
+        <div class="visual-grid">
+            <div class="visual-card">
+                <div class="visual-animation">
+                    <div class="file-system-viz">
+                        <div class="folder-icon">📁</div>
+                        <div class="file-items">
+                            <span class="file-item">📄 Doc</span>
+                            <span class="file-item">🖼️ Photo</span>
+                            <span class="file-item">🎵 Music</span>
+                        </div>
+                    </div>
+                </div>
+                <h3>📂 File System</h3>
+                <p>The OS organizes all your files into folders, just like a filing cabinet! It knows exactly where everything is stored so you can find it quickly.</p>
+            </div>
+            
+            <div class="visual-card">
+                <div class="visual-animation">
+                    <div class="memory-viz">
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                        <div class="memory-block"></div>
+                    </div>
+                </div>
+                <h3>💾 Memory (RAM)</h3>
+                <p>RAM is like your device's short-term memory. The OS decides which apps get to use memory and how much, like a teacher assigning desks!</p>
+            </div>
+            
+            <div class="visual-card">
+                <div class="visual-animation">
+                    <div class="cpu-viz">
+                        <div class="cpu-core">
+                            🧠
+                            <div class="cpu-pulse"></div>
+                        </div>
+                        <div class="cpu-tasks">
+                            <div class="cpu-task"></div>
+                            <div class="cpu-task"></div>
+                            <div class="cpu-task"></div>
+                            <div class="cpu-task"></div>
+                            <div class="cpu-task"></div>
+                        </div>
+                    </div>
+                </div>
+                <h3>⚡ CPU (Processor)</h3>
+                <p>The CPU is the brain that does all the thinking! The OS sends tasks to the CPU and decides which tasks are most important to do first.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why OS Matters Section -->
+    <section class="why-os-matters" id="why-matters">
+        <div class="section-header">
+            <span class="section-badge">⭐ Real Life</span>
+            <h2 class="section-title">Why Does This Matter?</h2>
+            <p class="section-subtitle">See how the OS helps you every single day!</p>
+        </div>
+        
+        <div class="stories-container">
+            <div class="story-card">
+                <div class="story-illustration">
+                    <div class="story-icon">🎮</div>
+                </div>
+                <div class="story-content">
+                    <h3>Playing Your Favorite Game</h3>
+                    <p>When you tap on a game, the OS loads it from storage, puts it in memory, tells the CPU to run it, and shows it on your screen - all in seconds!</p>
+                    <div class="story-highlight">
+                        <p>💡 Without an OS, your device wouldn't know how to start the game!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-card">
+                <div class="story-illustration">
+                    <div class="story-icon">📸</div>
+                </div>
+                <div class="story-content">
+                    <h3>Taking & Saving Photos</h3>
+                    <p>When you take a photo, the OS controls the camera, processes the image, saves it to storage, and organizes it in your gallery!</p>
+                    <div class="story-highlight">
+                        <p>💡 The OS makes sure your photos don't get lost and are easy to find!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="story-card">
+                <div class="story-illustration">
+                    <div class="story-icon">📚</div>
+                </div>
+                <div class="story-content">
+                    <h3>Doing Homework Online</h3>
+                    <p>The OS helps you browse the web, type documents, switch between apps, and save your work - all while keeping everything running smoothly!</p>
+                    <div class="story-highlight">
+                        <p>💡 Multitasking is possible because the OS manages everything!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h3>🖥️ OS Explorer</h3>
+                <p>Making technology education fun and accessible for everyone. Learn about operating systems through interactive experiences!</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📸</a>
+                    <a href="#" class="social-link">▶️</a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#what-is-os">📚 What is OS?</a></li>
+                    <li><a href="#os-types">🗂️ Types of OS</a></li>
+                    <li><a href="#how-it-works">⚡ How it Works</a></li>
+                    <li><a href="#comparison">⚖️ Compare</a></li>
+                    <li><a href="#fun-learning">🎮 Fun Learning</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">📖 Glossary</a></li>
+                    <li><a href="#">🎥 Video Tutorials</a></li>
+                    <li><a href="#">📝 Worksheets</a></li>
+                    <li><a href="#">👨‍🏫 For Teachers</a></li>
+                    <li><a href="#">❓ FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">👥 Our Team</a></li>
+                    <li><a href="#">📧 Contact Us</a></li>
+                    <li><a href="#">🤝 Partners</a></li>
+                    <li><a href="#">📰 Blog</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Organized by <span class="highlight">Zubeg Ideal Tech Hub</span> | Made with ❤️ for learners everywhere</p>
+            <p style="margin-top: 0.5rem;">© 2024 OS Explorer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">⬆️</button>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confetti-container"></div>
+
+    <script>
+        // ==================== LOADING ANIMATION ====================
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.loader').classList.add('hidden');
+            }, 1500);
+        });
+
+        // ==================== MOBILE MENU ====================
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const spans = mobileMenuBtn.querySelectorAll('span');
+            spans.forEach((span, i) => {
+                span.style.transform = navLinks.classList.contains('active') 
+                    ? (i === 0 ? 'rotate(45deg) translateY(8px)' : i === 1 ? 'opacity: 0' : 'rotate(-45deg) translateY(-8px)')
+                    : '';
+            });
+        });
+
+        // Close mobile menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // ==================== SCROLL PROGRESS ====================
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            scrollProgress.style.width = scrollPercent + '%';
+
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            if (scrollTop > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==================== OS CARDS EXPAND ====================
+        document.querySelectorAll('.os-card').forEach(card => {
+            card.querySelector('.expand-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                card.classList.toggle('expanded');
+                const btn = card.querySelector('.expand-btn');
+                btn.innerHTML = card.classList.contains('expanded') 
+                    ? 'Show Less <span>↑</span>' 
+                    : 'Learn More <span>→</span>';
+            });
+        });
+
+        // ==================== OS SIMULATION ====================
+        const simulations = {
+            app: {
+                steps: [
+                    { icon: '👆', text: 'You tap the app icon', delay: 0 },
+                    { icon: '🔍', text: 'OS finds the app in storage', delay: 600 },
+                    { icon: '💾', text: 'OS loads app into memory', delay: 1200 },
+                    { icon: '🧠', text: 'CPU starts running the app', delay: 1800 },
+                    { icon: '📱', text: 'App appears on your screen!', delay: 2400 }
+                ],
+                result: '✅ App opened successfully!'
+            },
+            file: {
+                steps: [
+                    { icon: '📝', text: 'You click "Save"', delay: 0 },
+                    { icon: '📋', text: 'OS gets your file data', delay: 600 },
+                    { icon: '📁', text: 'OS finds a place in storage', delay: 1200 },
+                    { icon: '💾', text: 'OS writes the data to disk', delay: 1800 },
+                    { icon: '✓', text: 'OS updates the file directory', delay: 2400 }
+                ],
+                result: '✅ File saved successfully!'
+            },
+            music: {
+                steps: [
+                    { icon: '🎵', text: 'You press play', delay: 0 },
+                    { icon: '🔍', text: 'OS finds the music file', delay: 600 },
+                    { icon: '📖', text: 'OS reads the audio data', delay: 1200 },
+                    { icon: '🔊', text: 'OS sends data to speakers', delay: 1800 },
+                    { icon: '🎶', text: 'Music plays from speakers!', delay: 2400 }
+                ],
+                result: '✅ Music playing!'
+            },
+            photo: {
+                steps: [
+                    { icon: '📸', text: 'You press the camera button', delay: 0 },
+                    { icon: '📷', text: 'OS activates the camera sensor', delay: 600 },
+                    { icon: '🖼️', text: 'OS captures the image data', delay: 1200 },
+                    { icon: '✨', text: 'OS processes the photo', delay: 1800 },
+                    { icon: '💾', text: 'OS saves to your gallery!', delay: 2400 }
+                ],
+                result: '✅ Photo saved to gallery!'
+            }
+        };
+
+        function simulateProcess(type) {
+            const sim = simulations[type];
+            const prompt = document.getElementById('sim-prompt');
+            const output = document.getElementById('sim-output');
+            const processViz = document.getElementById('process-viz');
+
+            // Reset
+            prompt.style.display = 'none';
+            output.innerHTML = '';
+            processViz.innerHTML = '';
+            processViz.classList.add('active');
+
+            // Create steps
+            sim.steps.forEach((step, index) => {
+                const stepEl = document.createElement('div');
+                stepEl.className = 'process-step';
+                stepEl.innerHTML = `
+                    <div class="process-step-icon">${step.icon}</div>
+                    <span>${step.text}</span>
+                `;
+                processViz.appendChild(stepEl);
+
+                setTimeout(() => {
+                    stepEl.classList.add('visible');
+                    if (index > 0) {
+                        processViz.children[index - 1].classList.add('complete');
+                    }
+                }, step.delay);
+            });
+
+            // Show result
+            setTimeout(() => {
+                const resultEl = document.createElement('div');
+                resultEl.className = 'output-line';
+                resultEl.style.color = '#00D9B5';
+                resultEl.style.fontSize = '1.2rem';
+                resultEl.style.fontWeight = 'bold';
+                resultEl.style.marginTop = '1rem';
+                resultEl.textContent = sim.result;
+                processViz.appendChild(resultEl);
+                setTimeout(() => resultEl.style.opacity = '1', 100);
+            }, 3200);
+
+            // Update active button
+            document.querySelectorAll('.sim-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.closest('.sim-btn').classList.add('active');
+        }
+
+        // ==================== QUIZ FUNCTIONALITY ====================
+        const quizQuestions = [
+            {
+                question: "What does OS stand for?",
+                options: ["Online System", "Operating System", "Open Software", "Output Service"],
+                correct: 1
+            },
+            {
+                question: "Which of these is a mobile OS?",
+                options: ["Windows", "Linux", "Android", "macOS"],
+                correct: 2
+            },
+            {
+                question: "What does the OS do when you click an app?",
+                options: ["Nothing", "Turns off the device", "Loads and runs the app", "Deletes the app"],
+                correct: 2
+            },
+            {
+                question: "RAM is like the device's...",
+                options: ["Heart", "Short-term memory", "Eyes", "Ears"],
+                correct: 1
+            },
+            {
+                question: "Which company makes iOS?",
+                options: ["Google", "Microsoft", "Apple", "Samsung"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        function loadQuestion() {
+            const question = quizQuestions[currentQuestion];
+            document.getElementById('quiz-question').textContent = question.question;
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            const letters = ['A', 'B', 'C', 'D'];
+            question.options.forEach((option, index) => {
+                const optionEl = document.createElement('button');
+                optionEl.className = 'quiz-option';
+                optionEl.innerHTML = `
+                    <span class="option-letter">${letters[index]}</span>
+                    <span>${option}</span>
+                `;
+                optionEl.addEventListener('click', () => selectAnswer(index));
+                optionsContainer.appendChild(optionEl);
+            });
+
+            document.getElementById('quiz-progress').style.width = ((currentQuestion + 1) / quizQuestions.length * 100) + '%';
+            document.getElementById('quiz-progress-text').textContent = `${currentQuestion + 1}/${quizQuestions.length}`;
+            
+            document.getElementById('quiz-feedback').classList.remove('show');
+            document.getElementById('quiz-next').style.display = 'none';
+            document.getElementById('quiz-restart').style.display = 'none';
+        }
+
+        function selectAnswer(index) {
+            const question = quizQuestions[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('quiz-feedback');
+            
+            options.forEach((opt, i) => {
+                opt.style.pointerEvents = 'none';
+                if (i === question.correct) {
+                    opt.classList.add('correct');
+                } else if (i === index && i !== question.correct) {
+                    opt.classList.add('incorrect');
+                }
+            });
+
+            if (index === question.correct) {
+                score++;
+                feedback.textContent = '🎉 Correct! Great job!';
+                feedback.className = 'quiz-feedback show correct';
+                createConfetti();
+            } else {
+                feedback.textContent = '❌ Oops! The correct answer is: ' + question.options[question.correct];
+                feedback.className = 'quiz-feedback show incorrect';
+            }
+
+            if (currentQuestion < quizQuestions.length - 1) {
+                document.getElementById('quiz-next').style.display = 'inline-flex';
+            } else {
+                showQuizResults();
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function showQuizResults() {
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.textContent = `🏆 Quiz Complete! You got ${score}/${quizQuestions.length} correct!`;
+            feedback.className = 'quiz-feedback show correct';
+            document.getElementById('quiz-restart').style.display = 'inline-flex';
+            if (score >= 4) createConfetti();
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            loadQuestion();
+        }
+
+        // ==================== DRAG AND DROP ====================
+        let draggedItem = null;
+        let correctDrops = 0;
+
+        function initDragDrop() {
+            const dragItems = document.querySelectorAll('.drag-item');
+            const dropZones = document.querySelectorAll('.drop-zone');
+
+            dragItems.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', handleDragOver);
+                zone.addEventListener('dragleave', handleDragLeave);
+                zone.addEventListener('drop', handleDrop);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedItem = this;
+            this.classList.add('dragging');
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+
+            const itemCategory = draggedItem.dataset.category;
+            const zoneCategory = this.dataset.category;
+
+            if (itemCategory === zoneCategory) {
+                const droppedEl = document.createElement('div');
+                droppedEl.className = 'dropped-item';
+                droppedEl.innerHTML = `
+                    <span>${draggedItem.textContent}</span>
+                    <button class="remove-item" onclick="removeDroppedItem(this, '${draggedItem.textContent}', '${itemCategory}')">✕</button>
+                `;
+                this.querySelector('.drop-zone-items').appendChild(droppedEl);
+                draggedItem.remove();
+                correctDrops++;
+                checkDragDropComplete();
+            } else {
+                draggedItem.style.animation = 'shake 0.5s ease';
+                setTimeout(() => draggedItem.style.animation = '', 500);
+            }
+        }
+
+        function removeDroppedItem(btn, text, category) {
+            const item = document.createElement('div');
+            item.className = 'drag-item';
+            item.draggable = true;
+            item.dataset.category = category;
+            item.textContent = text;
+            item.addEventListener('dragstart', handleDragStart);
+            item.addEventListener('dragend', handleDragEnd);
+            document.getElementById('drag-items').appendChild(item);
+            btn.parentElement.remove();
+            correctDrops--;
+            document.getElementById('drag-score').textContent = '';
+        }
+
+        function checkDragDropComplete() {
+            if (correctDrops === 6) {
+                document.getElementById('drag-score').innerHTML = '🎉 Perfect! You sorted everything correctly!';
+                createConfetti();
+            }
+        }
+
+        function resetDragDrop() {
+            location.reload();
+        }
+
+        // ==================== MATCHING GAME ====================
+        const matchingPairs = [
+            { id: 1, icon: '🪟', label: 'Windows', type: 'item' },
+            { id: 1, icon: '💻', label: 'Laptop OS', type: 'match' },
+            { id: 2, icon: '🤖', label: 'Android', type: 'item' },
+            { id: 2, icon: '📱', label: 'Phone OS', type: 'match' },
+            { id: 3, icon: '🧠', label: 'CPU', type: 'item' },
+            { id: 3, icon: '⚡', label: 'Processor', type: 'match' },
+            { id: 4, icon: '💾', label: 'RAM', type: 'item' },
+            { id: 4, icon: '🧠', label: 'Memory', type: 'match' },
+            { id: 5, icon: '📁', label: 'Folder', type: 'item' },
+            { id: 5, icon: '📂', label: 'File System', type: 'match' },
+            { id: 6, icon: '🔒', label: 'Security', type: 'item' },
+            { id: 6, icon: '🛡️', label: 'Protection', type: 'match' }
+        ];
+
+        let selectedCard = null;
+        let matches = 0;
+        let isChecking = false;
+
+        function initMatching() {
+            const grid = document.getElementById('matching-grid');
+            grid.innerHTML = '';
+            
+            const shuffled = [...matchingPairs].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach((pair, index) => {
+                const card = document.createElement('div');
+                card.className = 'match-card';
+                card.dataset.id = pair.id;
+                card.dataset.index = index;
+                card.innerHTML = `
+                    <div class="match-icon">${pair.icon}</div>
+                    <div class="match-label">${pair.label}</div>
+                `;
+                card.addEventListener('click', () => handleMatchClick(card));
+                grid.appendChild(card);
+            });
+
+            matches = 0;
+            selectedCard = null;
+            updateMatchingScore();
+        }
+
+        function handleMatchClick(card) {
+            if (isChecking || card.classList.contains('matched') || card === selectedCard) return;
+
+            card.classList.add('selected');
+
+            if (!selectedCard) {
+                selectedCard = card;
+            } else {
+                isChecking = true;
+                
+                if (selectedCard.dataset.id === card.dataset.id && selectedCard.dataset.index !== card.dataset.index) {
+                    // Match found!
+                    setTimeout(() => {
+                        selectedCard.classList.remove('selected');
+                        selectedCard.classList.add('matched');
+                        card.classList.remove('selected');
+                        card.classList.add('matched');
+                        matches++;
+                        updateMatchingScore();
+                        selectedCard = null;
+                        isChecking = false;
+
+                        if (matches === 6) {
+                            setTimeout(() => {
+                                createConfetti();
+                                document.getElementById('matching-score').innerHTML = '🎉 Amazing! You matched them all!';
+                            }, 300);
+                        }
+                    }, 500);
+                } else {
+                    // No match
+                    setTimeout(() => {
+                        selectedCard.classList.remove('selected');
+                        selectedCard.classList.add('wrong');
+                        card.classList.remove('selected');
+                        card.classList.add('wrong');
+                        
+                        setTimeout(() => {
+                            selectedCard.classList.remove('wrong');
+                            card.classList.remove('wrong');
+                            selectedCard = null;
+                            isChecking = false;
+                        }, 500);
+                    }, 500);
+                }
+            }
+        }
+
+        function updateMatchingScore() {
+            document.getElementById('matching-score').textContent = `Matches: ${matches}/6`;
+        }
+
+        function resetMatching() {
+            initMatching();
+        }
+
+        // ==================== TAB SWITCHING ====================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.closest('.tab-btn').classList.add('active');
+            document.getElementById(tabId + '-tab').classList.add('active');
+
+            if (tabId === 'matching') initMatching();
+            if (tabId === 'quiz') loadQuestion();
+        }
+
+        // ==================== CONFETTI EFFECT ====================
+        function createConfetti() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#6C63FF', '#FF6B9D', '#00D9B5', '#FFB547', '#8B85FF'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = confetti.style.width;
+                container.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // ==================== INTERSECTION OBSERVER FOR ANIMATIONS ====================
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.os-card, .visual-card, .story-card, .comparison-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // ==================== INITIALIZE ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadQuestion();
+            initDragDrop();
+            initMatching();
+        });
+
+        // ==================== SMOOTH SCROLL FOR NAV LINKS ====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ==================== DIAGRAM NODE INTERACTIONS ====================
+        document.querySelectorAll('.diagram-node').forEach(node => {
+            node.addEventListener('click', function() {
+                document.querySelectorAll('.diagram-node').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
